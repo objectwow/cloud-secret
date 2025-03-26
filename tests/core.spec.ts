@@ -1,5 +1,5 @@
 import { SecretManager } from "../src";
-import { BaseProvider } from "../src/providers/base";
+import { BaseProvider } from "../src/providers";
 import * as path from "path";
 import { exec } from "child_process";
 

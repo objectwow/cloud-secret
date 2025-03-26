@@ -22,17 +22,52 @@ npm i @objectwow/cloud-secret
 
 ## With Google Secret Manager
 
+### Step 1: Setup authentication
+
+There are two ways to authentication with GCP
+
+#### Solution 1: Setup gcloud CLI
+
+- Recommendation, because when someone leaves, you can delete their account to prevent further access.
+- Link: https://cloud.google.com/sdk/docs/install
+- After that, login: `gcloud auth application-default login`
+
+#### Solution 2: Setup authentication by service account or keyFilename
+
+- Link: https://cloud.google.com/iam/docs/service-accounts-create#console
+
+### Step 2: Setup source code via sample
+
+See sample at [here](./example/google)
+
 ## With AWS Secret Manager
+
+Coming soon...
 
 ## With Azure Key Vault
 
+Coming soon...
+
 ## With Hashicorp Vault
+
+Coming soon...
 
 # Parameters
 
-```typescript
+### Provider
 
-```
+- GoogleProvider
+- AWSProvider
+- AzureProvider
+- VaultProvider
+
+### Config
+
+- enable: Whether to enable the secret manager. On the server, if you inject all sensitive data via Deployment or Shell, you don’t need to use it, so you MUST set this to false. Default is true.
+- useCache: A boolean indicating whether to use file cache or not. Default is true.
+- envPath: Path to store environment variables in a file. This is helpful when using a Monorepo.
+- hashKey: A string indicating the hash key to encrypt and decrypt secret values. Leave it blank if you don't want to encrypt secret values.
+- debug: A boolean indicating whether to print debug message or not. Default is true.
 
 # Internal resources
 

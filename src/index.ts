@@ -1,2 +1,2 @@
-export * from './core'
-export * from './providers/base'
+export * from "./core";
+export * from "./providers";

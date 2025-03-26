@@ -1,6 +1,6 @@
 {
   "name": "@objectwow/cloud-secret",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Nguyen Van Tuan",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -10,9 +10,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/objectwow/join.git"
+    "url": "git+https://github.com/objectwow/cloud-secret.git"
   },
-  "homepage": "https://github.com/objectwow/join#readme",
+  "homepage": "https://github.com/objectwow/cloud-secret#readme",
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run test && npm run build",
@@ -22,6 +22,7 @@
   },
   "license": "ISC",
   "devDependencies": {
+    "@google-cloud/secret-manager": "^6.0.1",
     "@types/jest": "^29.5.13",
     "@types/node": "22.7.5",
     "benchmark": "^2.1.4",

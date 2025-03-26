@@ -9,8 +9,8 @@ export interface SecretManagerConfig {
   envPath?: string;
   useCache?: boolean;
   hashKey?: string;
-  debug?: boolean;
-  enable?: boolean;
+  debug?: boolean | string;
+  enable?: boolean | string;
 }
 
 export class SecretManager {
@@ -19,18 +19,18 @@ export class SecretManager {
   private removeSecretScriptPath: string;
   private useCache: boolean = true;
   private hashKey: string;
-  private debug: boolean = true;
-  private enable: boolean = true;
+  private debug: boolean | string = true;
+  private enable: boolean | string = true;
 
   /**
    * Creates an instance of SecretManager.
    * @param provider A provider class that implements {@link BaseProvider}
    * @param config An options object that can contain the following properties:
+   * - enable: A boolean indicating whether to enable the secret manager or not. Default is true.
    * - useCache: A boolean indicating whether to use file cache or not. Default is true.
    * - envPath: A string indicating a path to store environment variables in a file. Default is ${CACHE_PATH}/.env.secret.
    * - hashKey: A string indicating the hash key to encrypt and decrypt secret values. Leave it blank if you don't want to encrypt secret values.
    * - debug: A boolean indicating whether to print debug message or not. Default is true.
-   * - enable: A boolean indicating whether to enable the secret manager or not. Default is true.
    */
   constructor(provider: BaseProvider, config: SecretManagerConfig = {}) {
     this.secretProvider = provider;

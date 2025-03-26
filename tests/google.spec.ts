@@ -1,5 +1,5 @@
 import { SecretManager } from "../src";
-import { GoogleProvider } from "../src/providers/google";
+import { GoogleProvider } from "../src/providers";
 
 describe("SecretManager", () => {
   let secretManager: SecretManager;
