@@ -4,10 +4,16 @@ async function loadEnvFile() {
   // You need to install devDependencies - @google-cloud/secret-manager
   // npm i -D @google-cloud/secret-manager
   const secretManager = new SecretManager(
-    new GoogleProvider({
-      projectId: process.env.PROJECTID,
-      secretId: process.env.SECRET_ID,
-    }),
+    new GoogleProvider(
+      {
+        projectId: process.env.PROJECTID,
+        secretId: process.env.SECRET_ID,
+      },
+      {
+        // Another authentication method if you don't use gcloud auth
+        // Check at document GoogleAuthOptions - https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#creating-the-client-instance
+      }
+    ),
     {
       hashKey: "your_device_info",
       useCache: true,
