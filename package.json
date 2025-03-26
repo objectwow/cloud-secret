@@ -22,7 +22,6 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@google-cloud/secret-manager": "^6.0.1",
     "@types/jest": "^29.5.13",
     "@types/node": "22.7.5",
     "benchmark": "^2.1.4",
