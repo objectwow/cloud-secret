@@ -1,4 +1,6 @@
-import { SecretManager, GoogleProvider } from "../../src";
+// import { SecretManager, GoogleProvider } from "../../src";
+// Change to use the following
+import { SecretManager, GoogleProvider } from "@objectwow/cloud-secret";
 
 async function loadEnvFile() {
   // You need to install devDependencies - @google-cloud/secret-manager

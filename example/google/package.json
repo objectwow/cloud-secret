@@ -1,12 +1,9 @@
 {
-  "name": "@objectwow/cloud-secret",
-  "version": "1.0.1",
+  "name": "sample",
+  "version": "1.0.0",
   "author": "Nguyen Van Tuan",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
     "dev": "env-cmd -f .env ts-node main.ts"
   },
@@ -17,6 +14,7 @@
     "typescript": "5.6.3"
   },
   "dependencies": {
+    "@objectwow/cloud-secret": "^1.0.6",
     "env-cmd": "^10.1.0"
   }
 }
