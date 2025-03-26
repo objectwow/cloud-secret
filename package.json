@@ -1,0 +1,52 @@
+{
+  "name": "@objectwow/cloud-secret",
+  "version": "1.0.0",
+  "author": "Nguyen Van Tuan",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "description": "A secure and efficient solution for managing sensitive data by dynamically loading secrets from cloud providers, eliminating the need for storing them in .env files.",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/objectwow/join.git"
+  },
+  "homepage": "https://github.com/objectwow/join#readme",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run test && npm run build",
+    "test": "jest",
+    "test:cov": "jest --coverage",
+    "clear-cache": "bash ./clear-cache.sh"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.13",
+    "@types/node": "22.7.5",
+    "benchmark": "^2.1.4",
+    "jest": "29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "5.6.3"
+  },
+  "jest": {
+    "verbose": true,
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "moduleNameMapper": {},
+    "rootDir": ".",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "./src/**/*.(t|j)s",
+      "!**/index.ts"
+    ],
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node"
+  }
+}

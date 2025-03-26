@@ -1,0 +1,7 @@
+tests
+coverage
+/src
+.vscode
+/benchmark.ts
+/index.ts
+/test-by-cases
