@@ -1,6 +1,6 @@
 {
   "name": "@objectwow/cloud-secret",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Nguyen Van Tuan",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
