@@ -10,7 +10,7 @@ Many teams choose to store sensitive data in .env files and push them to private
 
 # Solution
 
-The proposed solution is to split the environment variables into two parts: insensitive data stored in the source code, such as configuration details, and sensitive data stored in the cloud, including information like access keys and database passwords.
+The proposed solution is to split environment variables into two parts: insensitive data, such as configuration details, stored in the source code (e.g., .env or .env.backup), and sensitive data, such as access keys and database passwords, stored securely in the cloud and cached locally in an encrypted form.
 
 # Installation
 
