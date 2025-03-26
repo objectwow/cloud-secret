@@ -54,19 +54,16 @@ describe("SecretManager Core with Cache", () => {
   });
 
   afterAll(() => {
-    exec(
-      `bash "${path.join(__dirname, "../clear-cache.sh")}"`,
-      (error, stdout, stderr) => {
-        if (error) {
-          console.error(`Error executing script: ${error.message}`);
-          return;
-        }
-        if (stderr) {
-          console.error(`Script stderr: ${stderr}`);
-          return;
-        }
+    exec(`rm -rf .cloud-secret-cache`, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error executing script: ${error.message}`);
+        return;
       }
-    );
+      if (stderr) {
+        console.error(`Script stderr: ${stderr}`);
+        return;
+      }
+    });
   });
 
   it("should return specific value in ENV", async () => {

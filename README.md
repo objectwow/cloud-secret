@@ -18,6 +18,8 @@ The proposed solution is to split the environment variables into two parts: inse
 npm i @objectwow/cloud-secret
 ```
 
+Add `.cloud-secret-cache` to `.gitignore`
+
 # Usage
 
 ## With Google Secret Manager
@@ -65,7 +67,7 @@ Coming soon...
 
 - enable: Whether to enable the secret manager. On the server, if you inject all sensitive data via Deployment or Shell, you don’t need to use it, so you MUST set this to false. Default is true.
 - useCache: A boolean indicating whether to use file cache or not. Default is true.
-- envPath: Path to store environment variables in a file. This is helpful when using a Monorepo.
+- cachePath: Path to store cloud secret cache. Default .cloud-secret-cache in root workdir
 - hashKey: A string indicating the hash key to encrypt and decrypt secret values. Leave it blank if you don't want to encrypt secret values.
 - debug: A boolean indicating whether to print debug message or not. Default is true.
 

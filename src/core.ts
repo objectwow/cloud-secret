@@ -1,12 +1,9 @@
 import * as fs from "fs/promises";
-import * as path from "path";
 import * as crypto from "crypto";
 import { BaseProvider } from "./providers/base";
 
-const CACHE_PATH = path.join(__dirname, "../.cache");
-
 export interface SecretManagerConfig {
-  envPath?: string;
+  cachePath?: string;
   useCache?: boolean;
   hashKey?: string;
   debug?: boolean | string;
@@ -15,8 +12,8 @@ export interface SecretManagerConfig {
 
 export class SecretManager {
   private secretProvider: BaseProvider;
+  private cachePath: string;
   private secretENVPath: string;
-  private removeSecretScriptPath: string;
   private useCache: boolean = true;
   private hashKey: string;
   private debug: boolean | string = true;
@@ -28,7 +25,7 @@ export class SecretManager {
    * @param config An options object that can contain the following properties:
    * - enable: A boolean indicating whether to enable the secret manager or not. Default is true.
    * - useCache: A boolean indicating whether to use file cache or not. Default is true.
-   * - envPath: A string indicating a path to store environment variables in a file. Default is ${CACHE_PATH}/.env.secret.
+   * - cachePath: Path to store cloud secret cache. Default .cloud-secret-cache in root workdir
    * - hashKey: A string indicating the hash key to encrypt and decrypt secret values. Leave it blank if you don't want to encrypt secret values.
    * - debug: A boolean indicating whether to print debug message or not. Default is true.
    */
@@ -39,13 +36,8 @@ export class SecretManager {
       this.useCache = false;
     }
 
-    if (config?.envPath) {
-      this.secretENVPath = config.envPath;
-    } else {
-      this.secretENVPath = `${CACHE_PATH}/.env.secret`;
-    }
-
-    this.removeSecretScriptPath = `${CACHE_PATH}/remove-secret.sh`;
+    this.cachePath = config.cachePath ?? ".cloud-secret-cache";
+    this.secretENVPath = `${this.cachePath}/.env.secret`;
     this.hashKey = config.hashKey;
     this.debug = config.debug ?? true;
     this.enable = config.enable ?? true;
@@ -60,10 +52,12 @@ export class SecretManager {
   private async getSecret(keys: string[]) {
     const cached = await this.getSecretFromCache();
     if (cached && keys.every((key) => cached[key])) {
+      this.debug && console.info("Getting secret from cache successfully");
       return cached;
     }
 
-    this.debug && console.info("Getting secret from provider");
+    this.debug && console.info("Detect missing secret fields in the cache.");
+    this.debug && console.info("Getting secret from provider...");
     const secret = await this.secretProvider.getSecret(keys);
     const filteredSecret = keys.reduce(
       (acc: Record<string, unknown>, key: string) => {
@@ -72,6 +66,7 @@ export class SecretManager {
       },
       {}
     );
+    this.debug && console.info("Getting secret from provider successfully");
     await this.setSecretToCache(filteredSecret);
     return filteredSecret;
   }
@@ -129,23 +124,13 @@ export class SecretManager {
     }
     this.debug && console.info("Setting secret to cache...");
 
-    await fs.mkdir(CACHE_PATH, { recursive: true });
+    await fs.mkdir(this.cachePath, { recursive: true });
 
     const data = Object.entries(secret)
       .map(([key, value]) => `${key}=${this.encrypt(value)}`)
       .join("\n");
 
-    await Promise.all([
-      fs.writeFile(this.secretENVPath, data, "utf8"),
-      fs.writeFile(
-        `${this.removeSecretScriptPath}`,
-        `
-if [ -f "${this.secretENVPath}" ]; then
-  rm "${this.secretENVPath}"
-fi`,
-        "utf8"
-      ),
-    ]);
+    await Promise.all([fs.writeFile(this.secretENVPath, data, "utf8")]);
     this.debug && console.info("Secret has been set to cache");
   }
 

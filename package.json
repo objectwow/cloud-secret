@@ -1,6 +1,6 @@
 {
   "name": "@objectwow/cloud-secret",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "author": "Nguyen Van Tuan",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -17,8 +17,7 @@
     "build": "tsc",
     "prepublishOnly": "npm run test && npm run build",
     "test": "jest",
-    "test:cov": "jest --coverage",
-    "clear-cache": "bash ./clear-cache.sh"
+    "test:cov": "jest --coverage"
   },
   "license": "ISC",
   "devDependencies": {
