@@ -14,7 +14,7 @@
     "typescript": "5.6.3"
   },
   "dependencies": {
-    "@objectwow/cloud-secret": "^1.0.6",
+    "@objectwow/cloud-secret": "^1",
     "env-cmd": "^10.1.0"
   }
 }

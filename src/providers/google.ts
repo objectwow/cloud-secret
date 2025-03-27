@@ -67,13 +67,20 @@ export class GoogleProvider extends BaseProvider {
   }
 
   async getSecret(): Promise<Record<string, unknown>> {
-    const client = this.getClient();
+    try {
+      const client = this.getClient();
 
-    const [versionResponse] = await client.accessSecretVersion({
-      name: `projects/${this.config.projectId}/secrets/${this.config.secretId}/versions/${this.config.version}`,
-    });
+      const [versionResponse] = await client.accessSecretVersion({
+        name: `projects/${this.config.projectId}/secrets/${this.config.secretId}/versions/${this.config.version}`,
+      });
 
-    const secretValue = versionResponse.payload?.data?.toString();
-    return this.convertTextToObject(secretValue);
+      const secretValue = versionResponse.payload?.data?.toString();
+      return this.convertTextToObject(secretValue);
+    } catch (error) {
+      console.error(
+        "Error getting secret from Google Secret Manager:. Did you forgot to login?"
+      );
+      throw error;
+    }
   }
 }

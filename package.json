@@ -1,6 +1,6 @@
 {
   "name": "@objectwow/cloud-secret",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "author": "Nguyen Van Tuan",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -47,5 +47,13 @@
     ],
     "coverageDirectory": "./coverage",
     "testEnvironment": "node"
+  },
+  "peerDependencies": {
+    "@google-cloud/secret-manager": "^6"
+  },
+  "peerDependenciesMeta": {
+    "@google-cloud/secret-manager": {
+      "optional": true
+    }
   }
 }
